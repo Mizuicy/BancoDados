@@ -6,6 +6,7 @@ FROM Territories
 GROUP BY RegionID;
 
 -- 2.Selecione da tabela order_details todas as ordens que tiveram
+--pelo menos um item com mais de 50 unidade vendidadas
 
 SELECT * FROM [Order Details];
 
@@ -23,7 +24,7 @@ SELECT * FROM Employees;
 -- 3.qual o tempo medio de envio por cidade destino
 
 SELECT Orders.ShipCity AS Cidade, 
-  AVG(DATEDIFF(day, Orders.OrderDate, Orders.ShippedDate)) AS MediaDias
+  AVG(DATEDIFF(DAY, Orders.OrderDate, Orders.ShippedDate)) AS MediaDias
 FROM Orders 
 GROUP BY Orders.ShipCity;
 
@@ -43,7 +44,7 @@ GROUP BY
   Customers.Country
 ORDER BY Employees.FirstName;
 
--- 5.qual o tempo medio de envio por cidade destino
+-- 5.Calcule o preço de cada pedido após os descontos seram aplicados
 
 SELECT Orders.OrderID,[Order Details].UnitPrice * ( 1 - [Order Details].Discount) AS ValorTotal
 FROM Orders 
